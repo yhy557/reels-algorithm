@@ -6,11 +6,18 @@ const videoFrame = document.getElementById("imagePlace")
 
 const cntFruit = document.getElementById("counterFruit")
 const cntCar = document.getElementById("counterCar")
-const cntCountry = document.getElementById("counterCountry")
+const cntCountry = document.getElementById("counterCountries")
 
 const pctFruitEl = document.getElementById("percentF")
 const pctCarEl = document.getElementById("percentC")
 const pctCountryEl = document.getElementById("percentCo")
+
+const like = document.getElementById("counterLikes")
+const likeB = document.getElementById("likeBtn")
+const likeGif = document.querySelector(".centered-icon");
+const fruitsLikeCount = document.getElementById("fruitsLike");
+const carsLikeCount = document.getElementById("carsLike");
+const countryLikeCount = document.getElementById("countriesLike");
 
 const dataSet = {
     fruits: ["images/fruits.jpg", "images/fruits2.jpg", "images/fruits3.jpg"],
@@ -81,6 +88,8 @@ const updateTimer = () => {
 
 
 btn.addEventListener("click", () => {
+    like.innerText = 0
+    likeGif.style.opacity = 0
     totalWeight = pctCar + pctFruit + pctCountry
     if (isRunning == false) {
         isRunning = true;
@@ -128,3 +137,80 @@ stopBtn.addEventListener("click", () => {
         countryCount = 0;
     }
 });
+
+const animationHeart = () => {
+    if (likeGif.style.opacity == 0) {
+        const interval2 = setInterval(() => {
+            counterLike++;
+            if (counterLike === 1) {
+                likeGif.style.opacity = 0.3;
+            }
+            else if (counterLike === 2) {
+                likeGif.style.opacity = 0.5;
+            }
+            else if (counterLike === 3) {
+                likeGif.style.opacity = 0.7;
+            }
+            else if (counterLike === 4) {
+                likeGif.style.opacity = 0.9;
+            }
+            else if (counterLike === 5) {
+                likeGif.style.opacity = 1;
+            }
+            else if (counterLike === 6) {
+                likeGif.style.opacity = 0.9;
+            }
+            else if (counterLike === 7) {
+                likeGif.style.opacity = 0.7;
+            }
+            else if (counterLike === 8) {
+                likeGif.style.opacity = 0.5;
+            }
+            else if (counterLike === 9) {
+                likeGif.style.opacity = 0.3;
+            }
+            else if (counterLike === 10) {
+                likeGif.style.opacity = 0;
+                counterLike = 0
+                clearInterval(interval2);
+            }
+        }, 90);
+    }
+}
+
+let touchCounter = 0;
+let newname = null;
+let likesD = {
+    fruitsL: 0,
+    carsL: 0,
+    countriesL: 0
+}
+videoFrame.addEventListener("click", ( )=> {
+    touchCounter += 1
+    if (touchCounter > 2) {
+        alert(`2 yi aştı ${touchCounter}`)
+        touchCounter = 0
+    }
+    else if (touchCounter === 2) {
+        if (like.innerText === "0") {
+            newname = selectedTopic+"Like"
+            let element = document.getElementById(newname)
+            likesD[selectedTopic+"L"] += 1
+            element.innerText = likesD[selectedTopic+"L"]
+        }
+        like.innerText = 1
+        animationHeart()
+    }
+})
+
+let counterLike = 0;
+likeB.addEventListener("click", () => {
+    if (like.innerText === "0") {
+            newname = selectedTopic+"Like"
+            let element = document.getElementById(newname)
+            likesD[selectedTopic+"L"] += 1
+            element.innerText = likesD[selectedTopic+"L"]
+    }
+    like.innerText = 1
+    animationHeart()
+})
