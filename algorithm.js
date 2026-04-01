@@ -141,40 +141,14 @@ stopBtn.addEventListener("click", () => {
 const animationHeart = () => {
     if (likeGif.style.opacity == 0) {
         const interval2 = setInterval(() => {
-            counterLike++;
-            if (counterLike === 1) {
-                likeGif.style.opacity = 0.3;
-            }
-            else if (counterLike === 2) {
-                likeGif.style.opacity = 0.5;
-            }
-            else if (counterLike === 3) {
-                likeGif.style.opacity = 0.7;
-            }
-            else if (counterLike === 4) {
-                likeGif.style.opacity = 0.9;
-            }
-            else if (counterLike === 5) {
-                likeGif.style.opacity = 1;
-            }
-            else if (counterLike === 6) {
-                likeGif.style.opacity = 0.9;
-            }
-            else if (counterLike === 7) {
-                likeGif.style.opacity = 0.7;
-            }
-            else if (counterLike === 8) {
-                likeGif.style.opacity = 0.5;
-            }
-            else if (counterLike === 9) {
-                likeGif.style.opacity = 0.3;
-            }
-            else if (counterLike === 10) {
+            counterLike+=0.1;
+            likeGif.style.opacity = counterLike;
+            if (counterLike >= 1) {
                 likeGif.style.opacity = 0;
-                counterLike = 0
+                counterLike = 0;
                 clearInterval(interval2);
             }
-        }, 90);
+        }, 80);
     }
 }
 
@@ -188,7 +162,6 @@ let likesD = {
 videoFrame.addEventListener("click", ( )=> {
     touchCounter += 1
     if (touchCounter > 2) {
-        alert(`2 yi aştı ${touchCounter}`)
         touchCounter = 0
     }
     else if (touchCounter === 2) {
